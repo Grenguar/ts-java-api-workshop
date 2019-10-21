@@ -1,0 +1,37 @@
+{
+  "name": "ts-java-api-workshop",
+  "version": "1.0.0",
+  "description": "Workshop for creating a simple API for your own TV series list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "start": "tsc && node ./build/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grenguar/ts-java-api-workshop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grenguar/ts-java-api-workshop/issues"
+  },
+  "homepage": "https://github.com/Grenguar/ts-java-api-workshop#readme",
+  "dependencies": {
+    "cross-fetch": "^3.0.4",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
+    "@types/supertest": "^2.0.8",
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
+}
