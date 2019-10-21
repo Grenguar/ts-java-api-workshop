@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  db:
+    container_name: db
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+      - mongo-config:/data/configdb
+  typescript-backend:
+    container_name: typescript_backend
+    build:
+      context: typescript/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    command: npm start
+    volumes:
+      - /app-ts/node_modules
+volumes:
+  data-volume:
+  mongo-config:
