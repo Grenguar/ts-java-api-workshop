@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
-import * as showController from "./controllers/showController";
+import { ShowController } from "./controllers/showController";
 
 const app: express.Application = express();
 app.use(express.json());
+const showController: ShowController = new ShowController();
 
 const seriesApi = "/api";
 
