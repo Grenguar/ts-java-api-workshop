@@ -1,45 +1,39 @@
-import express, { Request, Response } from "express";
-import { ShowController } from "./controllers/showController";
+import express from "express";
+import mongoose from "mongoose";
+import { MongoError } from "mongodb";
+import ShowRouter from "./routes/showRouter";
 
-const app: express.Application = express();
-app.use(express.json());
-const showController: ShowController = new ShowController();
+export default class App {
+  private app: express.Application = express();
+  private mongoUrl: string | undefined = process.env.MONGO_URL;
+  private showRouter: ShowRouter = new ShowRouter();
 
-const seriesApi = "/api";
+  get appInstance(): express.Application {
+    return this.app;
+  }
 
-app.get(`${seriesApi}/`, (req: Request, res: Response) => {
-  res.status(200).send("Hello ts/java workshop participant!");
-});
+  constructor() {
+    this.config();
+    this.mongoDBsetup();
+  }
 
-/**
- * Get all shows
- */
-app.route(`${seriesApi}/shows`).get(showController.allShows);
+  private config() {
+    this.app.use(express.json());
+    this.app.use("/api/", this.showRouter.routerInstance);
+  }
 
-/**
- * Add new show with the request body:
- * {
- *  "title": "Desprate Housewives",
- *   "language": "English",
- *   "description": "TV show about housewives and their adventures",
- *   "score": 78
- * }
- */
-app.route(`${seriesApi}/show`).post(showController.addShow);
-
-app
-  .route(`${seriesApi}/show/:id`)
-  /**
-   * Get show with the ID
-   */
-  .get(showController.getShow)
-  /**
-   * Delete show by ID
-   */
-  .delete(showController.deleteShow)
-  /**
-   * Update show by id and body
-   */
-  .put(showController.updateShow);
-
-export default app;
+  private mongoDBsetup() {
+    mongoose.Promise = global.Promise;
+    const connectionOptions = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    };
+    mongoose.connect(this.mongoUrl!, connectionOptions, (err: MongoError) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log("MongoDB connected");
+    });
+  }
+}
