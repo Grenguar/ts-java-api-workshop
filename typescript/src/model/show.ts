@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-const uri: string = process.env.MONGO_URL;
+const uri: string | undefined = process.env.MONGO_URL;
 
 mongoose.connect(uri!, (err: any) => {
   if (err) {
