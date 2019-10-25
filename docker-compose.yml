@@ -15,9 +15,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    command: npm start
+    links:
+      - db
+    command: npm run-script watch
+    # command: npm start
+    depends_on:
+      - db
     volumes:
+      - ./typescript:/app-ts:rw
       - /app-ts/node_modules
+    environment:
+      - MONGO_URL=mongodb://db:27017/local
 volumes:
   data-volume:
   mongo-config:
