@@ -17,8 +17,7 @@ services:
       - "8080:8080"
     links:
       - db
-    command: npm run-script watch
-    # command: npm start
+    command: npm start
     depends_on:
       - db
     volumes:
