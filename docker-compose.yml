@@ -8,24 +8,38 @@ services:
     volumes:
       - data-volume:/data/db
       - mongo-config:/data/configdb
-  typescript-backend:
-    container_name: typescript_backend
+  # typescript-backend:
+  #   container_name: typescript_backend
+  #   build:
+  #     context: typescript/
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   links:
+  #     - db
+  #   command: npm run-script watch
+  #   depends_on:
+  #     - db
+  #   volumes:
+  #     - ./typescript:/app-ts:rw
+  #     - /app-ts/node_modules
+  #   environment:
+  #     - MONGO_URL=mongodb://db:27017/local
+  java-backend:
+    container_name: java_backend
     build:
-      context: typescript/
+      context: java/
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "9000:9000"
     links:
       - db
-    command: npm run-script watch
-    # command: npm start
     depends_on:
       - db
-    volumes:
-      - ./typescript:/app-ts:rw
-      - /app-ts/node_modules
+    command: java -jar /usr/local/lib/ts-java-workshop-0.0.1-SNAPSHOT.jar
     environment:
-      - MONGO_URL=mongodb://db:27017/local
+      - SPRING_DATA_MONGODB_URI=mongodb://db:27017/local
+      - spring.data.mongodb.uri=mongodb://db:27017/local
 volumes:
   data-volume:
   mongo-config:
