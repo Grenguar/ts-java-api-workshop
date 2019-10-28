@@ -7,5 +7,5 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 FROM openjdk:8-jre-slim
 COPY --from=build /home/app/target/ts-java-workshop-0.0.1-SNAPSHOT.jar /usr/local/lib/ts-java-workshop-0.0.1-SNAPSHOT.jar
-EXPOSE 8080
+EXPOSE 9000
 CMD java -jar /usr/local/lib/ts-java-workshop-0.0.1-SNAPSHOT.jar
