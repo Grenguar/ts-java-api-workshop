@@ -16,7 +16,7 @@ public class Show {
 
   public Show() {}
 
-  public Show(ObjectId _id, String language, String description, Double score) {
+  public Show(ObjectId _id, String title, String language, String description, Double score) {
     this._id = _id;
     this.title = title;
     this.language = language;
@@ -61,8 +61,9 @@ public class Show {
 
   @Override
   public String toString() {
-    return "Shows{" +
-        "id='" + _id.toHexString() + '\'' +
+    return "Show{" +
+        "_id=" + _id +
+        ", title='" + title + '\'' +
         ", language='" + language + '\'' +
         ", description='" + description + '\'' +
         ", score=" + score +
