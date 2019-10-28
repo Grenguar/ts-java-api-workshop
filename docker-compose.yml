@@ -8,23 +8,23 @@ services:
     volumes:
       - data-volume:/data/db
       - mongo-config:/data/configdb
-  # typescript-backend:
-  #   container_name: typescript_backend
-  #   build:
-  #     context: typescript/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   links:
-  #     - db
-  #   command: npm run-script watch
-  #   depends_on:
-  #     - db
-  #   volumes:
-  #     - ./typescript:/app-ts:rw
-  #     - /app-ts/node_modules
-  #   environment:
-  #     - MONGO_URL=mongodb://db:27017/local
+  typescript-backend:
+    container_name: typescript_backend
+    build:
+      context: typescript/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - db
+    command: npm run-script watch
+    depends_on:
+      - db
+    volumes:
+      - ./typescript:/app-ts:rw
+      - /app-ts/node_modules
+    environment:
+      - MONGO_URL=mongodb://db:27017/local
   java-backend:
     container_name: java_backend
     build:
