@@ -16,7 +16,7 @@ public class Show {
 
   public Show() {}
 
-  public Show(ObjectId _id, String language, String description, Double score) {
+  public Show(ObjectId _id, String title, String language, String description, Double score) {
     this._id = _id;
     this.title = title;
     this.language = language;
@@ -26,6 +26,14 @@ public class Show {
 
   public String get_id() { return _id.toHexString(); }
   public void set_id(ObjectId _id) { this._id = _id; }
+  
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
   public String getLanguage() {
     return language;
@@ -51,18 +59,11 @@ public class Show {
     this.score = score;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
   @Override
   public String toString() {
-    return "Shows{" +
-        "id='" + _id.toHexString() + '\'' +
+    return "Show{" +
+        "_id=" + _id +
+        ", title='" + title + '\'' +
         ", language='" + language + '\'' +
         ", description='" + description + '\'' +
         ", score=" + score +
